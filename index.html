@@ -4,8 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F002%2F282%2F910%2Foriginal%2Felegant-white-background-free-vector.jpg&f=1&nofb=1&ipt=950abdbdee63890362d55e5016211f51d274ef734215cfe6985fc6deb9fae549');
+            background-size: cover;      /* Cover the whole page */
+            background-position: center; /* Center the image */
+            background-repeat: repeat-y;
+        }
+        #Header_base{
+            width: auto;
+            height: 50px;
+            background-color: rgba(133, 133, 133, 0.562);
+            margin-top: 0px;
+            position: relative;
+            background-size: cover;      /* or 'contain' or a specific size */
+            background-position: center; /* center the image */
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+        }
+        #Side-bar{
+            margin-top: 2%;
+            width: 30%;
+            height: 800px;
+            background-color: rgba(133, 133, 133, 0.562);
+            border-radius: 10px;
+            border-width: 1px;
+            border-color: black;
+            border-style: solid;
+            position: relative;
+            background-size: cover;      /* or 'contain' or a specific size */
+            background-position: center; /* center the image */
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+        }
+    </style>
 </head>
 <body>
+    <div id="Header_base">
+    <button
+      style="background:none; font:inherit; cursor:pointer; margin:5px; position:absolute; left:0; top: 40%; transform:translateY(-50%);">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F014%2F525%2F127%2Foriginal%2Fmedicine-capsules-drug-3d-rendering-free-png.png&f=1&nofb=1&ipt=4835f2cf7cdd098e80d7670d59f83f38af1b9d9bc63510c627e36020becdb8be"
+        alt="Logo" width="40" height="40">
+    </button>
+        <input type="text" placeholder="Search.." style="width: 50%;">
+        <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;">
+            My Account
+        </button>
+        <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;">
+            Favorite
+        </button>
+        <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;margin-right: 7%;">
+            Your cart
+        </button>
+    </div>
+
+    <div id="Side-bar">
+
+    </div>
     
 </body>
 </html>
