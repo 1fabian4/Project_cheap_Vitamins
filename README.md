@@ -1,1 +1,2 @@
 # Project_cheap_Vitamins
+This Project is an idea we had with my dad. In this day and age there are a lots of people who take vitamin pills for health or convinience sake, but in todays market it is way too overpriced fro the cost they make it and we wanna create a website that can sell these pills cheaply.
