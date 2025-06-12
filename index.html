@@ -40,20 +40,138 @@
             background-position: center; /* center the image */
             background-repeat: no-repeat;
             display: flex;
-            align-items: center;
-            justify-content: right;
+            align-items: top;
+            justify-content: left;
+        }
+        #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(80, 80, 80, 0.5);
+    z-index: 1000;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease;
+}
+
+        #Log.show, #Reg.show, #overlay.show {
+            opacity: 1;
+            visibility: visible;
+            display: block;
+        }
+        #Log {
+    width: 20%;
+    height: 500px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Remove or comment out the next two lines: */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease;
+}
+        #Log form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+        #Log input, #Log button {
+    margin: 10px 0;
+    width: 80%; /* Adjust as needed */
+    box-sizing: border-box;
+}
+        #Reg{
+
         }
     </style>
+    <script src="script.js" defer>
+
+    </script>
+    <script>
+        
+        function Reg_Log(){
+  var x = document.getElementById("Log");
+  var y = document.getElementById("overlay")
+  if (!x.classList.contains("show")) {
+    x.classList.add("show");
+    y.classList.add("show");
+  }
+}
+        function closeLog() {
+  document.getElementById("Log").classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
+    </script>
+      <script>
+    const SERVER_URL = 'http://[Computer-B-IP]:3000';
+    
+    // Load users on page load
+    async function loadUsers() {
+      try {
+        const response = await fetch(`${SERVER_URL}/api/users`);
+        const users = await response.json();
+        document.getElementById('user-list').innerHTML = 
+          users.map(user => `
+            <div>
+              ${user.username} (${user.email})
+            </div>
+          `).join('');
+      } catch (error) {
+        console.error('Error loading users:', error);
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('user-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const response = await fetch(`${SERVER_URL}/api/users`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value
+          })
+        });
+        
+        if (response.ok) {
+          loadUsers();
+          document.getElementById('user-form').reset();
+        }
+      } catch (error) {
+        console.error('Error adding user:', error);
+      }
+    });
+
+    // Initial load
+    loadUsers();
+  </script>
 </head>
 <body>
     <div id="Header_base">
     <button
-      style="background:none; font:inherit; cursor:pointer; margin:5px; position:absolute; left:0; top: 40%; transform:translateY(-50%);">
+      style="background:none; font:inherit; cursor:pointer; margin:0px; position:absolute; left:0; top: 50%; transform:translateY(-50%);">
         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F014%2F525%2F127%2Foriginal%2Fmedicine-capsules-drug-3d-rendering-free-png.png&f=1&nofb=1&ipt=4835f2cf7cdd098e80d7670d59f83f38af1b9d9bc63510c627e36020becdb8be"
         alt="Logo" width="40" height="40">
     </button>
         <input type="text" placeholder="Search.." style="width: 50%;">
-        <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;">
+        <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;" onclick="Reg_Log()">
             My Account
         </button>
         <button style="background:none; font-size:larger; cursor:pointer;border: none;margin: 1%;">
@@ -66,7 +184,27 @@
 
     <div id="Side-bar">
 
+        <label>
+            <input type="checkbox" name="subscribe" value="yes">
+                
+        </label>
     </div>
+
+    <div id="overlay"></div>
+
+    <div id="Log">
+    <button id="close-log"
+        style="position:absolute; top:0px; left:125px; background:none; border:none; font-size:1.5em; cursor:pointer; z-index:1200;"
+        onclick="closeLog()">&times;</button>
+    <form id="user-form">
+        <h1>Login</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit" style="width: min-content;">Login</button>
+        <button style="color: blue;font-size: small;background:none; border:none; font:inherit; cursor:pointer">Don't have an account?</button>
+    </form>
+</div>
+    <div id="user-list"></div>
     
 </body>
 </html>
